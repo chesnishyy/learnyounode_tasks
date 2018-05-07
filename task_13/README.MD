@@ -1,15 +1,15 @@
- ## HTTP JSON API SERVER (Задача 13 из 13)
+## HTTP JSON API SERVER (Exercise 13 of 13)
 
-  Реализуйте HTTP сервер, который возвращает JSON объект на GET запрос по
-  адресу /api/parsetime. Запрос должен содержать в строке запроса ключ 'iso'
-  и время в ISO-формате в качестве значения.
+  Write an HTTP server that serves JSON data when it receives a GET request
+  to the path '/api/parsetime'. Expect the request to contain a query string
+  with a key 'iso' and an ISO-format time as the value.
 
-  Например:
+  For example:
 
   /api/parsetime?iso=2013-08-10T12:10:15.474Z
 
-  JSON объект в ответе должен содержать только следующие свойства: 'hour',
-  'minute' и 'second'. Пример ответа:
+  The JSON response should contain only 'hour', 'minute' and 'second'
+  properties. For example:
 
      {
        "hour": 14,
@@ -17,38 +17,42 @@
        "second": 15
      }
 
-  Так же сервер должен обрабатывать запрос на '/api/unixtime', который
-  содержит такую же строку запроса, но возвращает UNIX-время в миллисекундах
-  (количество миллисекунд, прошедшее с 1 января 1970 00:00:00 UTC) в
-  свойстве 'unixtime'. Пример ответа:
+  Add second endpoint for the path '/api/unixtime' which accepts the same
+  query string but returns UNIX epoch time in milliseconds (the number of
+  milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'.
+  For example:
 
      { "unixtime": 1376136615474 }
 
-  Ваш сервер должен слушать порт, который Вы получите в качестве первого
-  аргумента командной строки.
+  Your server should listen on the port provided by the first argument to
+  your program.
 
-  ## ИНФОРМАЦИЯ
+ ─────────────────────────────────────────────────────────────────────────────
 
-  Объект request в HTTP сервере имеет свойство url, которое Вы должны
-  использовать, для того чтобы "направлять" запросы к нужным обработчикам.
+ ## HINTS
 
-  Вы можете парсить URL и строку запроса используя встроенный модуль url.
-  url.parse(request.url, true) пропарсит request.url и вернет объект с
-  необходимыми свойствами.
+  The request object from an HTTP server has a url property that you will
+  need to use to "route" your requests for the two endpoints.
 
-  Например, введите в командной строке:
+  You can parse the URL and query string using the Node core 'url' module.
+  url.parse(request.url, true) will parse content of request.url and provide
+  you with an object with helpful properties.
+
+  For example, on the command prompt, type:
 
      $ node -pe "require('url').parse('/test?q=1', true)"
 
-  Ответ сервера должен быть в формате строки JSON. Обратитесь к
-  JSON.stringify() за дополнительной информацией.
+  Documentation on the url module can be found by pointing your browser
+  here:
+  https://nodejs.org/api/url.html
 
-  Так же Вы должны быть добропорядочным жителем веба и ставить Content-Type
-  правильно:
+  Your response should be in a JSON string format. Look at JSON.stringify()
+  for more information.
+
+  You should also be a good web citizen and set the Content-Type properly:
 
      res.writeHead(200, { 'Content-Type': 'application/json' })
 
-  Объект Date в JavaScript может возвращать время в ISO формате, например,
-  new Date().toISOString(). Так же он может парсить этот формат, если
-  получит строку со временем на вход в коструктор Date. Date#getTime() также
-  может оказаться полезным.
+  The JavaScript Date object can print dates in ISO format, e.g. new
+  Date().toISOString(). It can also parse this format if you pass the string
+  into the Date constructor. Date.getTime() will also come in handy.
