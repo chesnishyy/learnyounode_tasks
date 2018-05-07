@@ -40,10 +40,6 @@
 
      $ node -pe "require('url').parse('/test?q=1', true)"
 
-  Документацию для url Вы cможете получить, набрав в браузере:
-  file://C:\Users\Igor.C\AppData\Roaming\npm\node_modules\learnyounode\node_
-  apidoc\url.html
-
   Ответ сервера должен быть в формате строки JSON. Обратитесь к
   JSON.stringify() за дополнительной информацией.
 
